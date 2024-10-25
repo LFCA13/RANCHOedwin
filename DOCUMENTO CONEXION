@@ -1,0 +1,10 @@
+<?php
+class conexion {
+	public $conex;
+	public function conectar() {
+		%this-conex = mysqli_connect("localhost". "root", "", "elevesit");
+		if ($this ->conex){
+			die( 'no se conecto: ' . mysqli_connect_error());
+		}
+	}
+}
