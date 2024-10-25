@@ -1,0 +1,80 @@
+"DOCUMENTO CONEXION.PHP"
+<?php
+class conexion {
+	public $conex;
+	public function conectar() {
+		%this-conex = mysqli_connect("localhost". "root", "", "elevesit");
+		if ($this ->conex){
+			die( 'no se conecto: ' . mysqli_connect_error());
+		}
+	}
+}
+
+
+
+"DOCUMENTO USUARIO.PHP"
+
+class usuario extends conexion{
+	public $id_usuario = 4;
+	public $nombre = "maria";
+	public $corre = "mc@gmail.com";
+
+	public function insertarusuario(){
+	$this->conectar();
+	$preparaSQL = $this-conex->prepare(""
+		"INSERT INTO usuario (id_usuario, nombre, correo) "
+		"VALUES (?,?,?)");
+	}
+	$preparaSQL->BIND_PARAM("iss", $this->id_usuario, $this->nombre, $this->correo);
+	$preparaSQL->execute();
+	$preparaSQL->close();
+	$this->conex->close();
+	
+}
+
+public function leerusuario($id_usuario){
+	$this->conectar();
+	$preparaSQL = $this->conex->prepare(SELECT id_usuario, nombre, correo"
+		. "FROM usuario WHERE id_usuario = ?");
+	$preparaSQL->bind_param("i", $id_usuario);
+	$preparaSQL->execute();
+	$resultado = $preparaSQL->get_result();
+	$usuario = $resultado->fetch_assoc();
+	print_r($usuario);
+	$preparaSQL->close();
+	$this->conex->close();
+}
+
+public function actualizacusuario() {
+	$this->conectar();
+	$preparaSQL = $this->conex->prepare("UPDATE usuario SET nombre = ?,"
+		. "correo = ? WHERE id_usuario = ?");
+	$preparaSQL->bind_param("ssi", $this->nombre, $this->correo, $this->id_usuario)
+	$preparaSQL->execute();
+	$preparaSQL->clore();
+	$this->conex->clores();
+}
+
+public function eliminarusuario(id_usuario){
+	$this->conectar():
+	$preparaSQL = $this->conex->prepare("UPDATE usuario SET nombre = ?", "
+		. "correo = ? WHERE id_usuario = >");
+	$preparaSQL->bind_param("ssi", $id_usuario);
+	$preparaSQL->execute();
+	$preparaSQL->close():
+	$this->conex->close();
+	
+}
+
+DOCUMENTO "INDEX.PHP"
+include_once "usuario.php";
+$c=new Usuario();
+
+$c->insertarUsuario();
+
+$c->leerUsuario(1);
+$c->nombre = "conchita";
+$c->correo = "con@gmail.com";
+$c->id_usuario=2;
+$c->actualizarUsuario();
+$c->eliminarUsuario(5);
