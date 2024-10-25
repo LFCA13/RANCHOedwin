@@ -1,0 +1,11 @@
+include_once "usuario.php";
+$c=new Usuario();
+
+$c->insertarUsuario();
+
+$c->leerUsuario(1);
+$c->nombre = "conchita";
+$c->correo = "con@gmail.com";
+$c->id_usuario=2;
+$c->actualizarUsuario();
+$c->eliminarUsuario(5);
